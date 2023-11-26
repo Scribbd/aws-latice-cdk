@@ -20,4 +20,4 @@ A producer does not need to be in a VPC that has an association with the service
 
 ## Notes
 
-If you wish to use least-privileged networking, you need to define an ingress rule that has a prefix-list as its source. As of writing this, [cdk does not support prefix lookup](https://github.com/aws/aws-cdk/issues/15115). If you are logged in, find yours [here](https://eu-west-1.console.aws.amazon.com/vpcconsole/home?region=eu-west-1#ManagedPrefixLists:v=3;search=:vpc-lattice).
+If you wish to use least-privileged networking, you need to define an ingress rule that has a prefix-list as its source. As of writing this, [cdk does not support prefix lookup](https://github.com/aws/aws-cdk/issues/15115). If you are logged in, find yours [here](https://eu-west-1.console.aws.amazon.com/vpcconsole/home?region=eu-west-1#ManagedPrefixLists:v=3;search=:vpc-lattice). Update [this line accordingly](https://github.com/Scribbd/aws-latice-cdk/blob/main/servicenettest/servicenettest_stack.py#L30).
