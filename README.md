@@ -1,58 +1,23 @@
 
-# Welcome to your CDK Python project!
+# CDK test app for VPC Lattice
 
-This is a blank project for CDK development with Python.
+This is an app to test whenever a service producer needs to have an association with the Lattice Network to field requests from the service network.
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+This app deploys:
+- 2 default vpc with(!) NAT Gateways (!)
+- 2 Ec2, 1 in each VPC
+- 3 Security groups
+- 1 Lattice Service Network
+- 1 Lattice VPC Association
+- 1 Lattice Service
+- 1 Lattice Service Association
 
-This project is set up like a standard Python project.  The initialization
-process also creates a virtualenv within this project, stored under the `.venv`
-directory.  To create the virtualenv it assumes that there is a `python3`
-(or `python` for Windows) executable in your path with access to the `venv`
-package. If for any reason the automatic creation of the virtualenv fails,
-you can create the virtualenv manually.
+![Diagram of deployed resources](./docs/LatticeApp.jpg)
 
-To manually create a virtualenv on MacOS and Linux:
+## Conclusion
 
-```
-$ python3 -m venv .venv
-```
+A producer does not need to be in a VPC that has an association with the service network to field requests for the serice to function.
 
-After the init process completes and the virtualenv is created, you can use the following
-step to activate your virtualenv.
+## Notes
 
-```
-$ source .venv/bin/activate
-```
-
-If you are a Windows platform, you would activate the virtualenv like this:
-
-```
-% .venv\Scripts\activate.bat
-```
-
-Once the virtualenv is activated, you can install the required dependencies.
-
-```
-$ pip install -r requirements.txt
-```
-
-At this point you can now synthesize the CloudFormation template for this code.
-
-```
-$ cdk synth
-```
-
-To add additional dependencies, for example other CDK libraries, just add
-them to your `setup.py` file and rerun the `pip install -r requirements.txt`
-command.
-
-## Useful commands
-
- * `cdk ls`          list all stacks in the app
- * `cdk synth`       emits the synthesized CloudFormation template
- * `cdk deploy`      deploy this stack to your default AWS account/region
- * `cdk diff`        compare deployed stack with current state
- * `cdk docs`        open CDK documentation
-
-Enjoy!
+If you wish to use least-privileged networking, you need to define an ingress rule that has a prefix-list as its source. As of writing this, [cdk does not support prefix lookup](https://github.com/aws/aws-cdk/issues/15115). If you are logged in, find yours [here](https://eu-west-1.console.aws.amazon.com/vpcconsole/home?region=eu-west-1#ManagedPrefixLists:v=3;search=:vpc-lattice).
